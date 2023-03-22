@@ -1,0 +1,363 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:rgb(30,30,30);
+    font-family:"Vibur",system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+    height: 150vh;
+    color: white;
+    overflow-x: hidden;
+}
+
+#main{
+    height: 200vh;
+    position: absolute;
+    left: 20%;
+    width: 60%;
+    background-color: rgb(50, 50, 50);
+
+    /*offset-x, offset-y, spread, blur */
+    box-shadow: 0px 0px 25px 10px black;
+    margin-top: -50px;
+    margin-bottom: 50px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#skills-wrapper,
+#profil-wrapper,
+#piscine-wrapper{
+    position: absolute;
+    top: 30%;
+    width: 90%;
+    height: fit-content;
+    
+    z-index: -1;
+}
+
+#profil-wrapper{
+    opacity: 0.05;
+    transition: 2.5s ease-in-out ;
+}
+
+.tv-span{
+    opacity: 0;
+}
+
+.tv-screen{
+    opacity: 1;
+}
+
+/* //////// COMMON OBJECTS /////// */
+.progress-bar{
+    width: 100%;
+    height:20px;
+
+    border: 2px solid white;
+    box-shadow:
+        0 0 .3rem #fff,
+        inset 0 0 .3rem #fff,
+        0 0 .1rem blueviolet,
+        inset 0 0 .5rem blueviolet,
+        0 0 .1rem blueviolet,
+        inset 0 0 .1rem blueviolet;
+}
+
+.progress-bar-fill{
+    height: 98%;
+    width: 0;
+    transition: 1s ease-in-out;
+    box-shadow:
+        0 0 .3rem #fff,
+        inset 0 0 .3rem #fff,
+        0 0 3rem blueviolet,
+        inset 0 0 2rem blueviolet,
+        0 0 2rem blueviolet,
+        inset 0 0 4rem blueviolet;
+}
+
+.svg-circle{
+    stroke: white;
+    stroke-width: 3;
+    fill:rgb(50,50,50);
+}
+
+#audit-up,#audit-down{
+    stroke-width: 3;
+    fill:rgb(50,50,50);
+}
+#audit-up{
+    stroke: white;
+}
+#audit-down{
+    stroke: white;
+}
+#audit-ratio{
+    fill: white;
+    font-size: 30px;
+}
+#audit-xp-up,
+#audit-xp-down{
+    fill: white;
+    font-size: 20px;
+}
+
+/* /////////// TV ////////// */
+
+#tv{
+    width: 70%;
+    height: 450px;
+    margin-top:5%;
+
+
+    border: 5px solid white;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+}
+
+#tv-screen{
+    width: 65%;
+    height: 80%;
+    margin-left:5%;
+    margin-right: 2.5%;
+
+    background-color: rgb(20,20,20);
+    border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 15px 15px black;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 5vh;
+
+    transition: 500ms ease-in-out;
+}
+
+#current-channel{
+    font-size: 50px;
+}
+
+#tv-buttons-container{
+    width: 20%;
+    height: 80%;
+    margin-left:2.5%;
+    margin-right: 5%;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+}
+
+#tv-power-button,
+#tv-channel-button{
+    border: 1px solid white;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    box-shadow: 0px 0px 5px 2px black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tv-power-button:hover,
+#tv-channel-button:hover{
+    cursor: pointer;
+}
+
+#tv-speakers-container{
+    width: 100%;
+    height: 30%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.tv-speaker{
+    height: 10%;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+/* //////// PROFIL //////// */
+
+#identifier-and-level{
+    display: flex;
+    width: 100%;
+}
+
+#identifier-container{
+    width: fit-content;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#level-container{
+    margin: 10px;
+    width: 80%;
+    display: flex;
+    height: 10%;
+}
+
+#level{
+    margin-right:5px;
+    border-radius: 100%;
+    padding:5px;
+    height: 20px;
+    width: 20px;
+}
+
+#rank-progress-bar{
+    height: 25px;
+    width: 100%;
+    border: 2px solid white;
+}
+
+.rank-progress-bar-step{
+    height: 20px;
+    border-right: 1px solid white;
+    z-index: 2;
+    margin-top: -20px;
+}
+
+.rank-progress-bar-step:nth-child(2){
+    width: 10%;
+}
+.rank-progress-bar-step:nth-child(3){
+    width: 20%;
+}
+.rank-progress-bar-step:nth-child(4){
+    width: 30%;
+}
+.rank-progress-bar-step:nth-child(5){
+    width: 40%;
+}
+.rank-progress-bar-step:nth-child(6){
+    width: 50%;
+}
+.rank-progress-bar-step:nth-child(7){
+    width: 55%;
+}
+.rank-progress-bar-step:nth-child(8){
+    width: 60%;
+}
+
+#profil-stats-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-axis{
+    stroke: white;
+    stroke-width: 2;
+}
+.graph-axis-title{
+    fill: white;
+    font: 10px;
+}
+.graph-dot{
+    fill: purple;
+}
+.graph-dot-details{
+    fill :white;
+    transition: 500ms;
+}
+
+/* //////// SKILLS //////// */
+
+#profil-wrapper{
+    z-index: 1;
+}
+
+.skills-container{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.skill-container{
+    width: 35%;
+    margin: 5% 5% 0 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-span-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 0 5px 0 5px;
+}
+.skill-name{
+    width: 20%;
+}
+
+/*/////////// PISCINE ////////////*/
+
+#piscine-form{
+    display: flex;
+}
+
+#piscine-selection{
+    width: 60%;
+    display: flex;
+    justify-content: space-evenly;
+}
+#piscine-selection>span{
+    font-size: 30px;
+}
+
+#piscine-sort-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+/*piscine graph*/
+#attempt-graph{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+}
+.attempt-name{
+}
+#attempts-container{
+    height: fit-content;
+    width: 80%;
+    border-left: 1px solid white;
+}
+.attempt-items{
+    display: flex;
+    margin:5px 0 5px 0;
+}
+.attempt-bar{
+    border: 1px solid white;
+    height: 16px;
+    width:20%;
+}
+
+

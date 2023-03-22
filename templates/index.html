@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GraphQL data</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/animation.css">
+</head>
+<body>
+    <div id="rain">
+        <div class="drop"></div>
+    </div>
+
+    <div id="main">
+        <!--/////////////// TV //////////////////-->
+        <div id="tv">
+
+            <div id="tv-screen">
+                <span class="tv-span">Zone01</span>
+                <span class="tv-span" id="current-channel"></span>
+            </div>
+
+            <div id="tv-buttons-container">
+                <div id="tv-power-button">pow</div>
+                <div id="tv-channel-button">chan</div>
+                <div id="tv-speakers-container">
+                    <div class="tv-speaker"></div>
+                    <div class="tv-speaker"></div>
+                    <div class="tv-speaker"></div>
+                    <div class="tv-speaker"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--/////////////// SKILLS PAGE //////////////////-->
+
+
+        <div id="skills-wrapper">
+            <h2>Exam</h2>
+            <div class="skills-container" id="exam-skills"></div>
+            <h2>Technical skills</h2>
+            <div class="skills-container" id="technical-skills"></div>
+            <h2>Specialties skills</h2>
+            <div class="skills-container" id="specialties-skills"></div>
+            <h2>Techno & Languages</h2>
+            <div class="skills-container" id="language-skills"></div>
+        </div>
+
+            <!--/////////////// PROFIL PAGE //////////////////-->
+
+
+        <div id="profil-wrapper">
+
+            <div id="identifier-and-level">
+
+                <div id="identifier-container">
+                    <span id="identifier">username</span>
+                    <span id="rank-span">x</span>
+                </div>
+
+                <div id="profil-stats-container">
+                    <span id="total-xp">xp</span>
+                    <span id="completed-ex">exos</span>
+                    <span id="completed-projects">projects</span>
+                </div>
+                
+            </div>
+
+            <div id="level-container">
+                <div id="level"></div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="rank-progress-bar-fill"></div>
+                    <div class="rank-progress-bar-step"></div>
+                    <div class="rank-progress-bar-step"></div>
+                    <div class="rank-progress-bar-step"></div>
+                    <div class="rank-progress-bar-step"></div>
+                    <div class="rank-progress-bar-step"></div>
+                    <div class="rank-progress-bar-step"></div>
+                    <div class="rank-progress-bar-step"></div>
+                </div>
+            </div>
+
+            
+
+            <h2>Level Progression</h2>
+
+            <svg id="rank-svg" width="1000" height="500">
+                <!-- X-axis -->
+                <line x1="50" y1="450" x2="950" y2="450" class="graph-axis"></line>
+                <text x="30" y="40" class="graph-axis-title">Level</text>
+
+                <!-- Y-axis -->
+                <line x1="50" y1="50" x2="50" y2="450" class="graph-axis"></line>
+                <text x="960" y="455" class="graph-axis-title">Time</text>
+            </svg>
+            
+            <h2>Audit</h2>
+
+            <svg width="1000" height="250">
+                <!-- <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" /> -->
+                <rect width="200" height="50" x="300" y="100" id="audit-down"/>
+                <rect height="50" x="500" y="100" id="audit-up"/>
+                <circle cx="500" cy="125" r="50" class="svg-circle"/>
+                <text x="470" y="135" id="audit-ratio">ratio</text>
+
+                <text x="350" y="80" id="audit-xp-down">ratio</text>
+                <text x="580" y="80" id="audit-xp-up">ratio</text>
+            </svg>
+        </div>
+
+        <!-- //////////////////// PISCINE ////////////////// -->
+        <div id="piscine-wrapper">
+            <div id="piscine-form">
+                <div id="piscine-selection">
+                    <button class="neon-button" id="switch-piscine" disabled="true">Piscine</button>
+                    <span>Go</span>
+                    <span>JS</span>
+                    <span>Rust</span>
+                </div>
+                
+
+                <div id="piscine-sort-container">
+                    <span>Sort by attempts</span>
+                    <div class="flex-col">
+                        <span>On</span>
+                        <button class="neon-button" id="piscine-filter-button" disabled=true>button</button>
+                        <span>Off</span>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div id="attempt-graph">
+                
+                <div id="attempts-container" class="flex-col">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../scripts/data.js"></script>
+    <script src="../scripts/main.js" type="module"></script>
+</body>
+</html>
