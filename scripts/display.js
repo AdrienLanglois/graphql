@@ -105,7 +105,6 @@ function UpdateAuditGraph(){
     let ratio = (AUDIT_UP/AUDIT_DOWN).toFixed(2)
 
     const rectangle = document.getElementById("audit-up")
-    console.log(Math.round(defaultRectWidth*ratio))
     rectangle.setAttribute("width",Math.round(defaultRectWidth*ratio))
     const ratioText = document.getElementById("audit-ratio")
     ratioText.innerHTML = ratio
@@ -158,13 +157,14 @@ export function DisplaySkill(skill,amount){
     languageSkills.append(container)
 }
 
+// ATTEMPTS
+
 export function DisplayAttemptsGraph(){
     const attemptsContainer = document.getElementById("attempts-container")
     attemptsContainer.innerHTML = ""
     let data = FilterByPiscine()
 
     for (const d of data){
-        console.log(d)
         const nameSpan = document.createElement("span")
         nameSpan.className = "attempt-name"
         nameSpan.innerText = d.name
@@ -173,14 +173,14 @@ export function DisplayAttemptsGraph(){
         itemsContainer.className = "attempt-items"
 
         const attemptBar = document.createElement("div")
-        attemptBar.className = "attempt-bar"
+        attemptBar.className = "progress-bar"
         attemptBar.style.width = 2*Math.round(d.failure/d.success)+"%"
 
         const attemptSpan = document.createElement("span")
         attemptSpan.className = "attempt-span"
-        attemptSpan.innerText = d.failure+d.success
+        attemptSpan.innerText = `(${d.success+d.failure} attempt)`
 
-        itemsContainer.append(nameSpan,attemptBar,attemptSpan)
+        itemsContainer.append(attemptBar,nameSpan,attemptSpan)
         attemptsContainer.append(itemsContainer)
     }
 

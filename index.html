@@ -1,3 +1,5 @@
+<!-- https://majestic-raindrop-6ac5b7.netlify.app/ -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +9,28 @@
     <title>GraphQL data</title>
     <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="./assets/animation.css">
+    <link rel="stylesheet" href="./assets/auth.css">
 </head>
 <body>
+    <div id="auth">
+        <div id="admin-container">
+            <span id="question-mark">???</span>
+            <div id="admin-box">Welcome user, please enter your username and password</div>
+        </div>
+        
+        <form id="login-form">
+            <div>
+                <span>username ></span>
+                <input type="text" class="auth-input username-input">
+            </div>
+            <div>
+                <span>password ></span>
+                <input type="password" class="auth-input password-input">
+            </div>
+            <input type="submit" style="display:none;">
+        </form>
+    </div>
+
     <div id="rain">
         <div class="drop"></div>
     </div>
@@ -98,7 +120,7 @@
             </svg>
             
             <h2>Audit</h2>
-
+            
             <svg width="1000" height="250">
                 <!-- <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" /> -->
                 <rect width="200" height="50" x="300" y="100" id="audit-down"/>
@@ -134,13 +156,10 @@
                 </div>
             </div>
 
-
             <div id="attempt-graph">
-                
-                <div id="attempts-container" class="flex-col">
-                </div>
-
+                <div id="attempts-container" class="flex-col"></div>
             </div>
+
         </div>
 
     </div>

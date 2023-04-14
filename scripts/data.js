@@ -3,7 +3,7 @@ const TECHNICAL_SKILLS = ["tcp","stats","front-end","back-end","algo"]
 const SPECIALTIES_SKILLS = ["game"]
 
 // user data
-
+let NAME = ""
 let LOGIN = ""
 let TOTAL_XP = 0
 let LEVEL = 0
@@ -24,10 +24,11 @@ const powerBtn = document.getElementById("tv-power-button")
 const channelBtn = document.getElementById("tv-channel-button")
 
 //sounds
-let SOUND_ENABLE = false
+let SOUND_ENABLE = true
 const rainOnBrick = new Audio("../assets/sounds/Rain_on_Brick.mp3")
 
-
+//html
+const mainDiv = document.getElementById("main")
 // profil page
 const profilWrapper = document.getElementById("profil-wrapper")
 const levelSpan = document.getElementById("level")

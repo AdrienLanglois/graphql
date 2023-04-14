@@ -1,6 +1,18 @@
 export function SetAllAnimation(){
+    LoginAnimation()
     MakeItRain()
     powerBtn.onclick = HandlePowerButton
+}
+
+function LoginAnimation(){
+    const input = document.getElementById("login-form")
+
+    setTimeout(()=>{
+        document.querySelector(".username-input").focus()
+        input.style.opacity = 1
+        input.style.margin = 0
+    },1500)
+    
 }
 
 function HandlePowerButton(){

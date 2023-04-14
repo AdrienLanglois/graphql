@@ -19,11 +19,13 @@ function HandleChannelButton(){
     case 0:// profil
         profilWrapper.style.opacity = 1
         currentChanSpan.innerText = "Profile"
+        mainDiv.style.height = "200vh"
         break;
     case 1:// skills
         skillsWrapper.style.opacity = 1
         skillsWrapper.style.zIndex = 1
         currentChanSpan.innerText = "Skills"
+        mainDiv.style.height = "200vh"
         break;
     case 2:// piscine
         piscineWrapper.style.opacity = 1
@@ -31,7 +33,7 @@ function HandleChannelButton(){
         currentChanSpan.innerText = "Piscine"
         piscineBtn.disabled = false
         piscineFilterBtn.disabled = false
-
+        mainDiv.style.height = "600vh"
         break;
     default:
         CURRENT_CHANNEL = 0

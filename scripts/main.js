@@ -1,25 +1,71 @@
 import { SetAllAnimation } from "./anim.js"
 import { UpdateAll } from "./display.js"
 import { HandleEveryInputs } from "./inputs.js"
-
+import {DisplayAdminMsg} from "./auth.js"
 //fetch parameters
 const DATABASE_URL = "https://zone01normandie.org/api/graphql-engine/v1/graphql"
-const QUERY_LIMIT = 50
+const LOGIN_URL = "https://zone01normandie.org/api/auth/signin"
 
-onload = ()=>{
-    FetchData()
-    HandleEveryInputs()
-    SetAllAnimation()
+document.querySelector("form").onsubmit = (event)=>{
+    event.preventDefault()
+
+    const username = document.querySelector(".username-input")
+    const password = document.querySelector(".password-input")
+
+    GetToken(username.value,password.value)
+    .then(token=>{
+
+        if (token.error){
+            DisplayAdminMsg("$access denied.$ unrecognized username/email or password.","red")
+            return
+        }
+        FetchData(token)
+        setTimeout(()=>DisplayAdminMsg(`Connected successfully, welcome $${NAME}$ !`,"cyan"),1000)
+        setTimeout(()=>{
+            document.getElementById("auth").remove()
+            document.getElementById("main").style.opacity = 1
+        },4000)
+    })
+    
+    username.value = ""
+    password.value = ""
+    return false //prevent page from reloading
 }
 
-function FetchData(offset=0){
+onload = ()=>{
+    DisplayAdminMsg(`Welcome user, please enter your $login$ and $password$.`,"yellow")
+    SetAllAnimation()
+    HandleEveryInputs()
+}
+
+async function GetToken(username,password){
+    const auth = btoa(username+":"+password)
+
+    const token = fetch(LOGIN_URL,{
+        method:"POST",
+
+        headers:{
+            Authorization: "Basic "+auth//basic authentification with base64 encoding (btoa)
+        },
+
+    }).then(response=>{
+        return response.json()
+    }).then(resp=>{
+        return resp
+    }).catch(()=>{
+        alert("error fetching authentification")
+    })
+    return token
+}
+
+function FetchData(token){
     const myQuery = `
     query{
-        user(where: {login: {_eq: "alangloi"}}) {
+        user {
             login
+            attrs
             
-            transactions (where:{type:{_in:["level","xp","up","down"]}}  
-                        offset:`+offset+`){
+            transactions (where:{type:{_in:["level","xp","up","down"]}}){
                 amount
                 type
                 path
@@ -31,14 +77,12 @@ function FetchData(offset=0){
                 }
             }
 
-            skills:transactions (where:{type:{_nin:["level","xp","up","down"]}}
-                                offset:${offset}){
+            skills:transactions (where:{type:{_nin:["level","xp","up","down"]}}){
                 amount
                 type
             }
 
             progresses(
-                offset:${offset} 
                 where:{
                   _and:{
                     object:{type:{_eq:"exercise"}},
@@ -59,12 +103,11 @@ function FetchData(offset=0){
     }
     `
 
-    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNDE4IiwiaWF0IjoxNjc5MzQ4ODI1LCJpcCI6IjgwLjEyLjg5LjE5NCwgMTcyLjE4LjAuMiIsImV4cCI6MTY3OTQzNTIyNSwiaHR0cHM6Ly9oYXN1cmEuaW8vand0L2NsYWltcyI6eyJ4LWhhc3VyYS1hbGxvd2VkLXJvbGVzIjpbInVzZXIiXSwieC1oYXN1cmEtY2FtcHVzZXMiOiJ7fSIsIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6InVzZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjoiMTQxOCIsIngtaGFzdXJhLXRva2VuLWlkIjoiZTE5N2I5YmEtZGQ2MC00Y2E4LWIxOGMtY2EyNmRkMmZmMDVhIn19.ztOUy7mwNL-QWQZ9t6lKrjG0OsxKP1moq0ukbuzdZWI" 
     fetch(DATABASE_URL,{
         method:"POST",
 
-        headers:/*token && */{
-            // Authorization : `Bearer ${token}`,
+        headers:token && {
+             Authorization : `Bearer ${token}`,
             "Content-Type":"application/json",
             "Accept":"application/json",
         },
@@ -73,24 +116,15 @@ function FetchData(offset=0){
             query:myQuery
         })
     }).then(response =>{
-
         return response.json()
-
     }).then(api=>{
+        NAME = api.data.user[0].attrs.firstName +" "+ api.data.user[0].attrs.lastName
         LOGIN = api.data.user[0].login
         GetProfilData(api.data.user[0].transactions)
         GetSkills(api.data.user[0].skills)
         GetAttempts(api.data.user[0].progresses)
 
-        // fetch until there's no more data to fetch
-        // update front-end when everything has been fetched
-        if (api.data.user[0].transactions.length == QUERY_LIMIT
-        || api.data.user[0].skills.length == QUERY_LIMIT
-        || api.data.user[0].progresses.length == QUERY_LIMIT){
-            FetchData(offset+QUERY_LIMIT)
-        }else{
-            UpdateAll()
-        }
+        UpdateAll()
 
     }).catch(err =>{
         alert(err)
@@ -199,5 +233,3 @@ function NewProgress(exerciceName,myPath){
 function IsFromCursus(path){
     return path.startsWith("/rouen/div-01") && !path.startsWith("/rouen/div-01/piscine")
 }
-
-
