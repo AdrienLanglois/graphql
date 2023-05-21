@@ -5,6 +5,11 @@ export function HandleEveryInputs(){
     piscineBtn.onclick = HandlePiscineButton
 }
 
+let disconnectBtn = document.getElementById("disconnect-btn")
+disconnectBtn.onclick = ()=>{
+    location.reload()
+}
+
 function HandleChannelButton(){
     if (!TV_ON){
         return

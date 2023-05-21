@@ -39,13 +39,15 @@ onload = ()=>{
 }
 
 async function GetToken(username,password){
+    //convert to base64 encoding
     const auth = btoa(username+":"+password)
 
     const token = fetch(LOGIN_URL,{
         method:"POST",
-
+            
         headers:{
-            Authorization: "Basic "+auth//basic authentification with base64 encoding (btoa)
+            //basic authentification
+            Authorization: "Basic "+auth
         },
 
     }).then(response=>{
